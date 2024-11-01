@@ -85,3 +85,14 @@ worker:
 .PHONY: check-updates
 check-updates:
 	go list -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all | grep "\["
+
+# See https://tailwindcss.com/blog/standalone-cli
+.PHONY: tailwind-compile
+tailwind-compile: ## Compile and minify your CSS for production
+	./tailwindcss -i input.css -o static/output.css --minify
+
+build-css: ## Build CSS assets (auto reload changes)
+	npx tailwindcss -i ./styles/styles.css -o ./static/styles_bundle.css
+
+watch-css: ## Build CSS assets (auto reload changes)
+	npx tailwindcss -i ./styles/styles.css -o ./static/styles_bundle.css --watch
