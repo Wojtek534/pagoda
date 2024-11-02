@@ -86,6 +86,11 @@ worker:
 check-updates:
 	go list -u -m -f '{{if not .Indirect}}{{.}}{{end}}' all | grep "\["
 
+.PHONY: run
+watch-go: ## Run the application with air (auto reload changes)
+	clear
+	air
+
 # See https://tailwindcss.com/blog/standalone-cli
 .PHONY: tailwind-compile
 tailwind-compile: ## Compile and minify your CSS for production
